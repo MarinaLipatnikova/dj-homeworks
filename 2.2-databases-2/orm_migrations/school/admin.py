@@ -1,13 +1,19 @@
 from django.contrib import admin
 
-from .models import Student, Teacher
+from .models import Student, Teacher, StudentTeachers
 
 
+class StudentTeachersInline(admin.TabularInline):
+    model = Student.teachers.through
 @admin.register(Student)
 class StudentAdmin(admin.ModelAdmin):
-    pass
+    list_display = ["name", "group"]
+    list_filter = ['group']
+    inlines = [StudentTeachersInline]
 
 
 @admin.register(Teacher)
 class TeacherAdmin(admin.ModelAdmin):
-    pass
+    list_display = ["name", "subject"]
+    list_filter = ['subject']
+    inlines = [StudentTeachersInline]
