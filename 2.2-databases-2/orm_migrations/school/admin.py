@@ -4,7 +4,7 @@ from .models import Student, Teacher, StudentTeachers
 
 
 class StudentTeachersInline(admin.TabularInline):
-    model = Student.teachers.through
+    model = StudentTeachers
 @admin.register(Student)
 class StudentAdmin(admin.ModelAdmin):
     list_display = ["name", "group"]
